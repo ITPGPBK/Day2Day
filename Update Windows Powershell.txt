@@ -1,0 +1,19 @@
+Install PSWindowsUpdate. Search for Windows Update
+# Set the execution policy to allow locally created scripts and remote scripts that are signed.
+set-executionpolicy remotesigned
+# Set the security protocol to TLS 1.2 for secure communications.
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+# Install the NuGet package provider forcefully.
+Install-PackageProvider -Name NuGet -force
+# Install the PSWindowsUpdate module forcefully, allowing it to overwrite existing commands if necessary.
+Install-Module PSWindowsUpdate -force -AllowClobber
+# Check and list available Windows updates.
+Get-WindowsUpdate
+
+Install Windows Updates Found from PSWindowsUpdate. Pick 1 Only
+# Manually approve each update during installation.
+Install-WindowsUpdate
+# Automatically approve all found updates and require manual reboot.
+install-windowsupdate –acceptall
+# Automatically approve all found updates and force an automatic reboot.
+install-windowsupdate –acceptall –autoreboot
